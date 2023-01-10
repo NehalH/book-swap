@@ -1,0 +1,83 @@
+<!-- Book exchange homepage -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Book Exchange</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav>
+      <a href="/">Home</a>
+      <a href="/search">Search</a>
+      <a href="/add">Add</a>
+      <a href="/mybooks">My Books</a>
+    </nav>
+    <!-- Page header -->
+    <header>
+      <h1>Book Swap</h1>
+      <p>Find, borrow, and exchange books with other readers</p>
+      <!-- Search form -->
+      <form onsubmit="search(); return false;">
+        <input type="text" id="search-input" placeholder="Search for a book">
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <!-- Page content -->
+    <main>
+      <h2>Featured Books</h2>
+      <!-- Display a list of featured books -->
+      <ul id="featured-books">
+        <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        <!-- Add more featured books here -->
+      </ul>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <p>Developed by Nehal & Nikhil</p>
+    </footer>
+  </body>
+</html>
