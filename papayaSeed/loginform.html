@@ -49,8 +49,8 @@
         
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a>Already have an accout?</a>
-      <a href="loginform.html" class="get-started-btn scrollto">Login</a>
+      <a>Do not have an accout?</a>
+      <a href="signupform.html" class="get-started-btn scrollto">Signup</a>
     </div>
   </header><!-- End Header -->
 
@@ -62,51 +62,35 @@
 
         <div class="section-title">
         </br>
-          <h2>SIGNUP</h2>
-          <p>Please enter your details.</p>
+          <h2>LOGIN</h2>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100"
 
           <div class="col-lg-6">
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            </br>
 
               <div class="row">
                 <div class="col form-group">
-                  <input type="text" name="fname" class="form-control" id="name" placeholder="First Name" required>
-                </div>
-                <div class="col form-group">
-                  <input type="text" name="lname" class="form-control" id="name" placeholder="Last Name" required>
+                  <input type="email" name="email" class="form-control" id="name" placeholder="Email" required>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col form-group">
-                  <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone number" required>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-                <div class="col form-group">
-                  <input type="number" class="form-control" name="phone" id="phone" placeholder="Phone number" required>
-                </div>
-              </div>
               
               <div class="my-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Signup</button></div>
+              <div class="text-center"><button type="submit">Login</button></div>
+            </br>
             </form>
           </div>
 
