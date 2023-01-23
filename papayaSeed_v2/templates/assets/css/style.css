@@ -1466,7 +1466,8 @@ section {
 # Blog
 --------------------------------------------------------------*/
 .blog {
-  padding: 40px 0 20px 0;
+  padding: 40px 20px 0;
+  width: 400px;
 }
 
 .blog .entry {
@@ -1507,7 +1508,6 @@ section {
   flex-wrap: wrap;
   list-style: none;
   align-items: center;
-  padding: 0;
   margin: 0;
 }
 
@@ -1519,6 +1519,7 @@ section {
   font-size: 16px;
   margin-right: 8px;
   line-height: 0;
+  padding: 5px 5px 5px 5px;
 }
 
 .blog .entry .entry-meta a {

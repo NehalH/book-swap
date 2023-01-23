@@ -294,4 +294,20 @@
    */
   new PureCounter();
 
+  // Select the form
+  const form = document.querySelector("form");
+
+  // Listen for the submit event of the form
+  form.addEventListener("submit", async (event) => {
+      // Prevent the default action (reloading the page)
+      event.preventDefault();
+      
+      // Get the form data
+      const data = new FormData(form);
+      window.location.href = "/";
+      // Send the data to the server using the POST method
+      
+  });
+
+
 })()
