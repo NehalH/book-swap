@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>User-Home - BookSwap</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="#">BookSwap<span>.</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
+
+      <a href="/logout" class="get-started-btn scrollto">Logout</a>
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 entries">
+            <h6>Books near you</h6>
+            <h2>Mangaluru</h2>
+          </div>
+          <div class="col-lg-4 entries">
+            <div class="row">
+              <div class="col-lg-8">
+
+                <div class="sidebar">
+    
+                  <h5 class="sidebar-title">Search by title</h5>
+                  <div class="sidebar-item search-form">
+                    <form action="">
+                      <input type="text">
+                      <button type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                  </div><!-- End sidebar search formn-->
+    
+                </div><!-- End sidebar -->
+    
+              </div>
+              <div class="col-lg-">
+    
+                <div class="sidebar">
+    
+                  <h5 class="sidebar-title">Search by genre</h5>
+                  <div class="sidebar-item search-form">
+                    <form action="">
+                      <input type="text">
+                      <button type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                  </div><!-- End sidebar search formn-->
+    
+                </div><!-- End sidebar -->
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Books Section ======= -->
+    
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          {% for book in books %}
+          
+            <article class="entry">
+              <h2 class="entry-title">
+                <h2>{{ book.bname }}</h2>
+              </h2>
+              <div class="entry-meta">
+                <li class="d-flex align-items-center"><i class="bi bi-person"> Author: {{ book.pub_year }}</i></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"> Publish Year: {{ book.pub_year }}</i></li>
+                <li class="d-flex align-items-center"><i class="bi bi-tags"> Genre: {{ book.category }}</i></li>
+              </div>
+              <div class="entry-content">
+                <p>
+                  
+                </p>
+                <div class="read-more">
+                  <a href="blog-single.html">Request Exchange</a>
+                </div>
+              </div>
+            </article><!-- End blog entry -->
+          
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>BookSwap<span>.</span></h3>
+            <p>
+              Sahyadri College of Engineering and Management<br>
+              Adyar, Mangalore - 575007<br>
+              Karnataka, India <br><br>
+              <strong>Phone:</strong> +91 8217785009 <br>
+              <strong>Email:</strong> nhosalikar@gmail.com<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#team">Team</a></li>
+            </ul>
+          </div>.
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          <strong><span>BookSwap</span></strong>. A DataBase Management System Mini Project
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/presento-bootstrap-corporate-template/ -->
+          Developed by <a href="https://bootstrapmade.com/">Nehal Hosalikar</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-end pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
