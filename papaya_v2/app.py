@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from models import *
+from sqlalchemy import desc
 
 app = Flask(__name__, static_folder='templates/assets')
 app.secret_key = 'your_secret_key'
@@ -9,7 +10,13 @@ db.init_app(app)
 # Home-page (Logged-out)    //////////////////////////////////////////////////////////////////////////////
 @app.route("/")
 def index():
-    return render_template('index.html')
+    book_count = Book.query.count()
+    reader_count = Reader.query.count()
+    location_count = Location.query.count()
+    last_tuple = Exchange.query.order_by(desc(Exchange.exch_id)).first()
+    exchange_count = last_tuple.exch_id
+
+    return render_template('index.html', book_count=book_count, reader_count=reader_count, location_count=location_count,exchange_count=exchange_count)
 
 
 # Home-page (Logged-in)    //////////////////////////////////////////////////////////////////////////////
@@ -19,9 +26,10 @@ def userhome():
         email = session['email']
         session.permanent = True
         user = Reader.query.filter_by(email=email).first()
+        location = Location.query.filter_by(pincode=user.pincode).first()
         books = Book.query.all()
         authors = Author.query.all()
-        return render_template('user-home.html', books=books, authors=authors)
+        return render_template('user-home.html', books=books, authors=authors, city=location.city)
     else:
         return redirect(url_for('login'))
 
@@ -42,7 +50,6 @@ def login():
             return 'Invalid Login Credentials' 
     else:
         return render_template('loginform.html')
-
 
 
 # Logout   //////////////////////////////////////////////////////////////////////////////////////////////

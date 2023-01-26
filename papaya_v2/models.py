@@ -35,7 +35,7 @@ class Author(db.Model):
 
 class Book(db.Model):
     book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    bname = db.Column(db.String(100), nullable=False)
+    bname = db.Column(db.String(30), nullable=False)
     pub_year = db.Column(db.Integer)
     category = db.Column(db.String(50))
 
@@ -46,3 +46,34 @@ class Book(db.Model):
 
     def __repr__(self):
         return '<Book %r>' % self.bname
+
+class Location(db.Model):
+    pincode = db.Column(db.Integer, primary_key=True)
+    locname = db.Column(db.String(20), nullable=False)
+    city = db.Column(db.String(30), nullable=False)
+    state = db.Column(db.String(30), nullable=True)
+
+    def __init__(self, pincode, locname, city, state):
+        self.pincode = pincode
+        self.locname = locname
+        self.city = city
+        self.state = state
+
+    def __repr__(self):
+        return '<Location %r>' % self.city
+
+class Exchange(db.Model):
+    exch_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    reader_1 = db.Column(db.Integer, nullable=False)
+    reader_2 = db.Column(db.Integer, nullable=False)
+    book_1 = db.Column(db.Integer, nullable=False)
+    book_2 = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, pincode, locname, city, state):
+        self.pincode = pincode
+        self.locname = locname
+        self.city = city
+        self.state = state
+
+    def __repr__(self):
+        return '<Location %r>' % self.city
