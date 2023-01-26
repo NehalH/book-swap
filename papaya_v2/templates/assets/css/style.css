@@ -1467,9 +1467,12 @@ section {
 /*--------------------------------------------------------------
 # Blog
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Blog
+--------------------------------------------------------------*/
 .blog {
-  padding: 40px 40px 0;
-  width: 600px;
+  padding: 40px 20px 0;
+
 }
 
 .blog .entry {
@@ -1510,6 +1513,7 @@ section {
   flex-wrap: wrap;
   list-style: none;
   align-items: center;
+  padding: 0;
   margin: 0;
 }
 
@@ -1521,7 +1525,6 @@ section {
   font-size: 16px;
   margin-right: 8px;
   line-height: 0;
-  padding: 5px 5px 5px 5px;
 }
 
 .blog .entry .entry-meta a {
@@ -1529,7 +1532,6 @@ section {
   font-size: 14px;
   display: inline-block;
   line-height: 1;
-  
 }
 
 .blog .entry .entry-content p {
@@ -1657,7 +1659,7 @@ section {
 }
 
 .blog .blog-author img {
-  width: 10px;
+  width: 120px;
   margin-right: 20px;
 }
 
@@ -1973,6 +1975,7 @@ section {
   color: #aaaaaa;
   font-size: 14px;
 }
+
 
 /*--------------------------------------------------------------
 # Footer

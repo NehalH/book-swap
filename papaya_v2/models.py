@@ -45,8 +45,6 @@ class Book(db.Model):
         self.bname = bname
         self.pub_year = pub_year
         self.category = category
-        self.shelf_id = shelf_id
-        self.pincode = pincode
 
     def __repr__(self):
         return '<Book %r>' % self.bname
