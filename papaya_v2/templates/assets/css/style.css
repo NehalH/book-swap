@@ -1468,8 +1468,8 @@ section {
 # Blog
 --------------------------------------------------------------*/
 .blog {
-  padding: 40px 20px 0;
-  width: 400px;
+  padding: 40px 40px 0;
+  width: 600px;
 }
 
 .blog .entry {

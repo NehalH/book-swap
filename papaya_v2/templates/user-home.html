@@ -38,7 +38,7 @@
       <h1 class="logo me-auto"><a href="#">BookSwap<span>.</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
-
+      <a href="/logout" class="get-started-btn scrollto">My Book Shelf</a>
       <a href="/logout" class="get-started-btn scrollto">Logout</a>
     </div>
   </header><!-- End Header -->
@@ -103,7 +103,11 @@
                 <h2>{{ book.bname }}</h2>
               </h2>
               <div class="entry-meta">
-                <li class="d-flex align-items-center"><i class="bi bi-person"> Author: {{ book.pub_year }}</i></li>
+                <li class="d-flex align-items-center"><i class="bi bi-person"> Author:
+                  {% for author in book_authors[book.book_id] %}
+                     {{ author.auth_name }},
+                  {% endfor %}
+                </i></li>
                 <li class="d-flex align-items-center"><i class="bi bi-clock"> Publish Year: {{ book.pub_year }}</i></li>
                 <li class="d-flex align-items-center"><i class="bi bi-tags"> Genre: {{ book.category }}</i></li>
               </div>
@@ -142,15 +146,6 @@
               <strong>Email:</strong> nhosalikar@gmail.com<br>
             </p>
           </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#hero">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#team">Team</a></li>
-            </ul>
-          </div>.
 
         </div>
       </div>

@@ -27,11 +27,17 @@ def userhome():
         session.permanent = True
         user = Reader.query.filter_by(email=email).first()
         location = Location.query.filter_by(pincode=user.pincode).first()
-        books = Book.query.all()
-        authors = Author.query.all()
-        return render_template('user-home.html', books=books, authors=authors, city=location.city)
+        books = (Book.query.join(Location, Book.pincode == Location.pincode)
+                 .filter(Location.city == location.city).all())
+        book_authors = {}
+        for book in books:
+            book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
+        return render_template('user-home.html', books=books, book_authors=book_authors, city=location.city)
     else:
         return redirect(url_for('login'))
+
+
+
 
 
 # Login     //////////////////////////////////////////////////////////////////////////////////////////////
