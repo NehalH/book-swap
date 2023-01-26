@@ -32,7 +32,7 @@ def userhome():
         book_authors = {}
         for book in books:
             book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
-        return render_template('user-home.html', books=books, book_authors=book_authors, city=location.city)
+        return render_template('user-home.html', books=books, book_authors=book_authors, city=location.city, user= user)
     else:
         return redirect(url_for('login'))
 
@@ -69,16 +69,24 @@ def signup():
 
 @app.route('/signup-data', methods=['POST'])
 def signup_data():
-    fname = request.form['fname']
-    lname = request.form['lname']
-    age = request.form['age']
-    pincode = request.form['pincode']
-    email = request.form['email']
-    password = request.form['password']
+    fname = request.form['fname']           #First Name
+    lname = request.form['lname']           #Last Name
+    age = request.form['age']               #Age
+    pincode = request.form['pincode']       #Pincode
+    email = request.form['email']           #Email
+    password = request.form['password']     #Password
     new_reader= Reader(fname=fname, lname=lname, age=age, pincode=pincode, email=email, password=password)
+    location = Location.query.filter_by(pincode=pincode).first()
+    if location is None:
+        locname = request.form['locname']   #Location Name
+        city = request.form['city']         #City
+        state = request.form['state']       #State
+        location = Location(pincode=pincode, locname=locname, city=city, state=state)
+        db.session.add(location)
     db.session.add(new_reader)
     db.session.commit()
     return
+
 
 if __name__ == '__main__':
     app.run(debug=True)

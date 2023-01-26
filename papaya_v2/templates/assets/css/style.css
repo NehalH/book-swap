@@ -1467,9 +1467,6 @@ section {
 /*--------------------------------------------------------------
 # Blog
 --------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Blog
---------------------------------------------------------------*/
 .blog {
   padding: 40px 0 20px 0;
 }
@@ -1503,7 +1500,7 @@ section {
 }
 
 .blog .entry .entry-meta {
-  margin-bottom: 15px;
+  margin-top: 15px;
   color: #777777;
 }
 
@@ -1522,6 +1519,9 @@ section {
 
 .blog .entry .entry-meta i {
   font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
   margin-right: 8px;
   line-height: 0;
 }
