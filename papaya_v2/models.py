@@ -38,11 +38,15 @@ class Book(db.Model):
     bname = db.Column(db.String(30), nullable=False)
     pub_year = db.Column(db.Integer)
     category = db.Column(db.String(50))
+    shelf_id = db.Column(db.Integer)
+    pincode = db.Column(db.Integer)
 
-    def __init__(self, bname, publish_year, category):
+    def __init__(self, bname, publish_year, category, shelf_id, pincode):
         self.bname = bname
         self.pub_year = pub_year
         self.gencategoryre = category
+        self.shelf_id = shelf_id
+        self.pincode = pincode
 
     def __repr__(self):
         return '<Book %r>' % self.bname
