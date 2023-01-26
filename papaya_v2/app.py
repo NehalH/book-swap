@@ -19,25 +19,30 @@ def index():
     return render_template('index.html', book_count=book_count, reader_count=reader_count, location_count=location_count,exchange_count=exchange_count)
 
 
-# Home-page (Logged-in)    //////////////////////////////////////////////////////////////////////////////
-@app.route('/user-home')
-def userhome():
-    if 'email' in session:
-        email = session['email']
-        session.permanent = True
-        user = Reader.query.filter_by(email=email).first()
-        location = Location.query.filter_by(pincode=user.pincode).first()
-        books = (Book.query.join(Location, Book.pincode == Location.pincode)
-                 .filter(Location.city == location.city).all())
-        book_authors = {}
-        for book in books:
-            book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
-        return render_template('user-home.html', books=books, book_authors=book_authors, city=location.city, user= user)
-    else:
-        return redirect(url_for('login'))
+# Signup    ////////////////////////////////////////////////////////////////////////////////////////////// 
+@app.route("/signup", methods= ["GET","POST"])
+def signup():
+    return render_template('signupform.html')
 
-
-
+@app.route('/signup-data', methods=['POST'])
+def signup_data():
+    fname = request.form['fname']           #First Name
+    lname = request.form['lname']           #Last Name
+    age = request.form['age']               #Age
+    pincode = request.form['pincode']       #Pincode
+    email = request.form['email']           #Email
+    password = request.form['password']     #Password
+    new_reader= Reader(fname=fname, lname=lname, age=age, pincode=pincode, email=email, password=password)
+    location = Location.query.filter_by(pincode=pincode).first()
+    if location is None:
+        locname = request.form['locname']   #Location Name
+        city = request.form['city']         #City
+        state = request.form['state']       #State
+        location = Location(pincode=pincode, locname=locname, city=city, state=state)
+        db.session.add(location)
+    db.session.add(new_reader)
+    db.session.commit()
+    return
 
 
 # Login     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,31 +70,41 @@ def logout():
     return redirect('/')
 
 
-# Signup    ////////////////////////////////////////////////////////////////////////////////////////////// 
-@app.route("/signup", methods= ["GET","POST"])
-def signup():
-    return render_template('signupform.html')
-
-@app.route('/signup-data', methods=['POST'])
-def signup_data():
-    fname = request.form['fname']           #First Name
-    lname = request.form['lname']           #Last Name
-    age = request.form['age']               #Age
-    pincode = request.form['pincode']       #Pincode
-    email = request.form['email']           #Email
-    password = request.form['password']     #Password
-    new_reader= Reader(fname=fname, lname=lname, age=age, pincode=pincode, email=email, password=password)
-    location = Location.query.filter_by(pincode=pincode).first()
-    if location is None:
-        locname = request.form['locname']   #Location Name
-        city = request.form['city']         #City
-        state = request.form['state']       #State
-        location = Location(pincode=pincode, locname=locname, city=city, state=state)
-        db.session.add(location)
-    db.session.add(new_reader)
-    db.session.commit()
-    return
+# Home-page (Logged-in)    //////////////////////////////////////////////////////////////////////////////
+@app.route('/user-home')
+def userhome():
+    if 'email' in session:
+        email = session['email']
+        session.permanent = True
+        user = Reader.query.filter_by(email=email).first()
+        location = Location.query.filter_by(pincode=user.pincode).first()
+        books = (Book.query.join(Location, Book.pincode == Location.pincode)
+                 .filter(Location.city == location.city).all())
+        book_authors = {}
+        for book in books:
+            book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
+        return render_template('user-home.html', books=books, book_authors=book_authors, city=location.city, user= user)
+    else:
+        return redirect(url_for('login'))
 
 
+# myBookShelf-page (Logged-out)    //////////////////////////////////////////////////////////////////////////////
+@app.route('/my-book-shelf')
+def my_book_shelf():
+    if 'email' in session:
+        email = session['email']
+        user = Reader.query.filter_by(email=email).first()
+        book_shelf = Book_shelf.query.filter_by(reader_id=user.reader_id).first()
+        books = Book.query.filter_by(shelf_id=book_shelf.shelf_id).all()
+        book_authors = {}
+        for book in books:
+            book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
+        return render_template('my-book-shelf.html', books=books, book_authors=book_authors, user=user)
+    else:
+        return redirect(url_for('login'))
+
+
+
+# //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if __name__ == '__main__':
     app.run(debug=True)

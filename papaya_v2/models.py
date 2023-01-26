@@ -2,6 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
+# Reader        /////////////////////////////////////////////////////////////////////////
 class Reader(db.Model):
     reader_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     fname = db.Column(db.String(20), nullable=False)
@@ -22,6 +24,8 @@ class Reader(db.Model):
     def __repr__(self):
         return '<Reader %r>' % self.email
 
+
+# Author        /////////////////////////////////////////////////////////////////////////
 class Author(db.Model):
     book_id = db.Column(db.Integer, primary_key=True)
     auth_name = db.Column(db.String(30), nullable=False, primary_key=True)
@@ -33,6 +37,8 @@ class Author(db.Model):
     def __repr__(self):
         return '<Author %r>' % self.auth_name
 
+
+# Book        /////////////////////////////////////////////////////////////////////////
 class Book(db.Model):
     book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     bname = db.Column(db.String(30), nullable=False)
@@ -45,10 +51,14 @@ class Book(db.Model):
         self.bname = bname
         self.pub_year = pub_year
         self.category = category
+        self.shelf_id = shelf_id
+        self.pincode = pincode
 
     def __repr__(self):
         return '<Book %r>' % self.bname
 
+
+# Location        /////////////////////////////////////////////////////////////////////////
 class Location(db.Model):
     pincode = db.Column(db.Integer, primary_key=True)
     locname = db.Column(db.String(20), nullable=False)
@@ -64,6 +74,8 @@ class Location(db.Model):
     def __repr__(self):
         return '<Location %r>' % self.city
 
+
+# Exchange        /////////////////////////////////////////////////////////////////////////
 class Exchange(db.Model):
     exch_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     reader_1 = db.Column(db.Integer, nullable=False)
@@ -78,4 +90,16 @@ class Exchange(db.Model):
         self.state = state
 
     def __repr__(self):
-        return '<Location %r>' % self.city
+        return '<Exchange %r>' % self.exch_id
+
+
+# Book_shelf        /////////////////////////////////////////////////////////////////////////
+class Book_shelf(db.Model):
+    shelf_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    reader_id = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, reader_id):
+        self.reader_id = reader_id
+
+    def __repr__(self):
+        return '<Book_shelf %r>' % self.shelf_id

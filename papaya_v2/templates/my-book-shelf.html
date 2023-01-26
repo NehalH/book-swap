@@ -39,8 +39,6 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
-      <a href="/my-book-shelf" class="get-started-btn scrollto">My Book Shelf</a>
-
       <a href="/logout" class="get-started-btn scrollto">Logout</a>
     </div>
   </header><!-- End Header -->
@@ -53,8 +51,7 @@
         <div class="row">
 
             <div class="col order-first">
-              <h6>Books near you</h6>
-              <h2>{{ city }}</h2>
+              <h2>{{ user.fname }}'s Bookshelf </h2>
             </div>
             <div class="col col-2 entries">
               <span>{{ user.fname }}</span> <span>{{ user.lname }}</span>
@@ -94,18 +91,23 @@
                       
                     </p>
                     <div class="read-more">
-                      <a href="blog-single.html">Request Exchange</a>
+                      <a href="blog-single.html">Edit Book Details</a>
                     </div>
                   </div>
                 </article><!-- End book entry -->
             
             {% endfor %}
           {% else %}
-            <p>Sorry, there are no books available in {{ city }} yet.</p>
+            <p>Sorry, there are no books in your Bookshelf yet.</p>
           {% endif %} 
           </div><!-- End book entries list -->
 
           <div class="col-lg-4">
+            <div class="sidebar">                  
+                  <div class="entry-content read-more">
+                    <a href="blog-single.html", style="background:#e03a3c;color:white; padding: 3px 3px 3px 3px; border-radius: 5pc;">+ Add book</a>
+                  </div>
+            </div>
 
             <div class="sidebar">
 
@@ -129,42 +131,6 @@
                 </form>
               </div>
               <!-- End sidebar search formn-->
-
-
-              <h3 class="sidebar-title">Recent Additions to the community</h3>
-              <div class="sidebar-item recent-posts">
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-1.jpg" alt="">
-                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-2.jpg" alt="">
-                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-3.jpg" alt="">
-                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-4.jpg" alt="">
-                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/blog/blog-recent-5.jpg" alt="">
-                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
 
             </div><!-- End sidebar -->
 
