@@ -77,6 +77,9 @@ def userhome():
         email = session['email']
         session.permanent = True
         user = Reader.query.filter_by(email=email).first()
+        if user:
+            session['reader_id'] = user.reader_id
+            session['pincode'] = user.pincode
         location = Location.query.filter_by(pincode=user.pincode).first()
         books = (Book.query.join(Location, Book.pincode == Location.pincode)
                  .filter(Location.city == location.city).all())
@@ -88,7 +91,7 @@ def userhome():
         return redirect(url_for('login'))
 
 
-# myBookShelf-page (Logged-out)    //////////////////////////////////////////////////////////////////////////////
+# myBookShelf-page      //////////////////////////////////////////////////////////////////////////////
 @app.route('/my-book-shelf')
 def my_book_shelf():
     if 'email' in session:
@@ -102,6 +105,51 @@ def my_book_shelf():
         return render_template('my-book-shelf.html', books=books, book_authors=book_authors, user=user)
     else:
         return redirect(url_for('login'))
+
+
+# add-New-Book      //////////////////////////////////////////////////////////////////////////////
+@app.route('/add-new-book')
+def add_new_book():
+    return render_template('add-new-book.html')
+
+@app.route('/add-book', methods=['POST'])
+def add_book():
+    # Obtain form data
+    bname = request.form['title']
+    auth_name = request.form['author']
+    pub_year = request.form['pub_year']
+    category = request.form['category']
+
+    email = session['email']
+    reader = Reader.query.filter_by(email=email).first()
+    reader_id = reader.reader_id
+    pincode = reader.pincode
+
+    # Obtain the reader's shelf_id from the database
+    shelf = Book_shelf.query.filter_by(reader_id=reader_id).first()
+    shelf_id = shelf.shelf_id
+
+    # Create a new book
+    new_book = Book(bname, pub_year, category, shelf_id, pincode)
+
+    # Add the new book to the database
+    db.session.add(new_book)
+    db.session.commit()
+    
+    # Add the author information to the database
+    new_author = Author(new_book.book_id, auth_name)
+    db.session.add(new_author)
+    db.session.commit()
+
+    # Redirect the user back to the bookshelf page
+    return redirect(url_for('my_bookshelf'))
+
+
+# Edit-Book      //////////////////////////////////////////////////////////////////////////////
+@app.route('/edit-book')
+def edit_book():
+    return render_template('edit-book.html')
+
 
 
 

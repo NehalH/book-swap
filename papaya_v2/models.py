@@ -47,7 +47,7 @@ class Book(db.Model):
     shelf_id = db.Column(db.Integer)
     pincode = db.Column(db.Integer)
 
-    def __init__(self, bname, publish_year, category, shelf_id, pincode):
+    def __init__(self, bname, pub_year, category, shelf_id, pincode):
         self.bname = bname
         self.pub_year = pub_year
         self.category = category
