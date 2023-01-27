@@ -150,8 +150,27 @@ def add_book():
 def edit_book():
     return render_template('edit-book.html')
 
+# Delete-Book      //////////////////////////////////////////////////////////////////////////////
+@app.route('/delete_book', methods=['POST','GET'])
+def delete_book():
+    print('HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII')
+    book_id = request.form['book_id']
+    book = Book.query.filter_by(book_id=book_id).first()
 
+    if book:
+        # Delete the book's authors from the Author table
+        authors_to_delete = Author.query.filter_by(book_id=book_id).all()
+        for author in authors_to_delete:
+            db.session.delete(author)
 
+        # Delete the book from the Book table
+        db.session.delete(book)
+
+        db.session.commit()
+        return redirect(url_for('my_book_shelf'))
+    else:
+        print('Book not found!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        return redirect(url_for('my_book_shelf'))
 
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if __name__ == '__main__':

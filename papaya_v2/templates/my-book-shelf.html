@@ -86,12 +86,29 @@
                     <li class="d-flex align-items-center"><i class="bi bi-clock"> Publish Year: {{ book.pub_year }}</i></li>
                     <li class="d-flex align-items-center"><i class="bi bi-tags"> Genre: {{ book.category }}</i></li>
                   </div>
+                  
                   <div class="entry-content">
-                    <p>
-                      
-                    </p>
                     <div class="read-more">
-                      <a href="blog-single.html">Edit Book Details</a>
+                      <form action="{{ url_for('delete_book') }}" method="post">
+                        <input type="hidden" name="book_id" value="{{ book.book_id }}">
+                        <input type="submit" value="Remove Book" 
+                        style=
+                        "display: inline-block; 
+                        background: #e03a3c;
+                        color: #fff;
+                        border-color: #e03a3c;
+                        padding: 6px 20px;
+                        transition: 0.3s;
+                        font-size: 14px;
+                        border-radius: 4px;">
+                      </form>
+                    </div>
+                  </div>
+                  
+                  </br>
+                  <div class="entry-content">
+                    <div class="read-more">
+                      <a href="-----">Edit Book Details</a>
                     </div>
                   </div>
                 </article><!-- End book entry -->
