@@ -156,7 +156,6 @@ def edit_book():
 
 @app.route('/edit-data', methods=['POST'])
 def edit_data():
-    print("WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
     # Obtain form data
     book_id = request.form['book_id']
     bname = request.form['title']
@@ -184,8 +183,6 @@ def edit_data():
     return redirect(url_for('my_bookshelf'))
 
 
-
-
 # Delete-Book      //////////////////////////////////////////////////////////////////////////////
 @app.route('/delete_book', methods=['POST'])
 def delete_book():
@@ -206,6 +203,25 @@ def delete_book():
     else:
         print('Book not found!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         return redirect(url_for('my_book_shelf'))
+
+# Exchange-Book      //////////////////////////////////////////////////////////////////////////////
+@app.route('/exchange-for')
+def exchange_for():
+    if 'email' in session:
+        email = session['email']
+        user = Reader.query.filter_by(email=email).first()
+        #book_1 = user.book_id
+        
+        book_shelf = Book_shelf.query.filter_by(reader_id=user.reader_id).first()
+        books = Book.query.filter_by(shelf_id=book_shelf.shelf_id).all()
+        book_authors = {}
+        for book in books:
+            book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
+        return render_template('exchange-for.html', books=books, book_authors=book_authors, user=user)
+    else:
+        return redirect(url_for('login'))
+
+
 
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if __name__ == '__main__':

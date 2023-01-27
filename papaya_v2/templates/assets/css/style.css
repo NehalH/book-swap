@@ -364,6 +364,40 @@ h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
+#signupsec {
+  width: 100%;
+  background: url("../img/646928.jpg") top center no-repeat;
+  background-size: cover;
+}
+
+#loginsec {
+  width: 100%;
+  height: 100vh;
+  background: url("../img/873624.jpg") top center no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-top: 82px;
+}
+
+#editbook {
+  width: 100%;
+  height: 100vh;
+  background: url("../img/11116.jpg") top center no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-top: 82px;
+}
+
+#addnewbook {
+  width: 100%;
+  height: 100vh;
+  background: url("../img/1761201.jpg") top center no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-top: 82px;
+}
+
 #hero {
   width: 100%;
   height: 100vh;
@@ -982,7 +1016,7 @@ section {
 
 .portfolio-details .portfolio-info {
   padding: 30px;
-  box-shadow: 0px 0 30px rgba(17, 17, 17, 0.08);
+  box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
 }
 
 .portfolio-details .portfolio-info h3 {
@@ -1030,7 +1064,7 @@ section {
   padding: 30px;
   margin: 30px 15px;
   min-height: 200px;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
   position: relative;
   background: #fff;
   border-radius: 15px;
@@ -1328,9 +1362,9 @@ section {
 # Contact
 --------------------------------------------------------------*/
 .contact .info-box {
-  color: #444444;
+  color: #b41818;
   text-align: center;
-  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  box-shadow: 0 0 30px white;
   padding: 30px 0 32px 0;
   border-radius: 4px;
 }
@@ -1358,7 +1392,8 @@ section {
 }
 
 .contact .php-email-form {
-  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+  box-shadow: 0 0 30px grey;
+  background-color: #ffffffa2;
   padding: 30px;
   border-radius: 8px;
   width: 30%;
@@ -1475,7 +1510,7 @@ section {
 .blog .entry {
   padding: 30px;
   margin-bottom: 60px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
 }
 
 .blog .entry .entry-img {
@@ -1655,7 +1690,7 @@ section {
 .blog .blog-author {
   padding: 20px;
   margin-bottom: 30px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
 }
 
 .blog .blog-author img {
@@ -1744,7 +1779,7 @@ section {
 .blog .blog-comments .reply-form {
   margin-top: 30px;
   padding: 30px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.1);
 }
 
 .blog .blog-comments .reply-form h4 {

@@ -39,8 +39,6 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
-      <a href="/my-book-shelf" class="get-started-btn scrollto">My Book Shelf</a>
-
       <a href="/logout" class="get-started-btn scrollto">Logout</a>
     </div>
   </header><!-- End Header -->
@@ -53,12 +51,10 @@
         <div class="row">
 
             <div class="col order-first">
-              <h6>Books near you</h6>
-              <h2>{{ city }}</h2>
+              <h2>Exchange Requests</h2>
             </div>
             <div class="col col-2 entries">
               <span>{{ user.fname }}</span> <span>{{ user.lname }}</span>
-            
               <h6>{{ user.email }}</h6>
             </div>
 
@@ -72,7 +68,7 @@
 
         <div class="row">
 
-          <div class="col-lg-8 entries">
+          <div class="col-lg-12 entries">
             {% if books %}
               {% for book in books %}
             
@@ -89,81 +85,32 @@
                     <li class="d-flex align-items-center"><i class="bi bi-clock"> Publish Year: {{ book.pub_year }}</i></li>
                     <li class="d-flex align-items-center"><i class="bi bi-tags"> Genre: {{ book.category }}</i></li>
                   </div>
+                  
+                  </br>
                   <div class="entry-content">
-                    <p>
-                      
-                    </p>
                     <div class="read-more">
-                      <a href="{{ url_for('exchange_for') }}">Request Exchange</a>
+                      <form action="{{ url_for('edit_book') }}" method="post">
+                        <input type="hidden" name="book_id" value="{{ book.book_id }}">
+                        <input type="submit" value="Accept Exchange Request" 
+                        style=
+                        "display: inline-block; 
+                        background: #e03a3c;
+                        color: #fff;
+                        border-color: #e03a3c;
+                        padding: 6px 20px;
+                        transition: 0.3s;
+                        font-size: 14px;
+                        border-radius: 4px;">
+                      </form>
                     </div>
                   </div>
                 </article><!-- End book entry -->
             
             {% endfor %}
           {% else %}
-            <p>Sorry, there are no books available in {{ city }} yet.</p>
+            <p>There are no exchange requests at the moment.</p>
           {% endif %} 
           </div><!-- End book entries list -->
-
-          <div class="col-lg-4">
-
-            <div class="sidebar">
-
-              <h3 class="sidebar-title">Search</h3>
-              <div class="sidebar-item search-form">
-                <form action="", >
-                  <input type="text", placeholder="Search by Title">
-                  <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div>
-              <div class="sidebar-item search-form">
-                <form action="", >
-                  <input type="text", placeholder="Search by Category">
-                  <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div>
-              <div class="sidebar-item search-form">
-                <form action="", >
-                  <input type="text", placeholder="Search by Author">
-                  <button type="submit"><i class="bi bi-search"></i></button>
-                </form>
-              </div>
-              <!-- End sidebar search formn-->
-
-
-              <h3 class="sidebar-title">Recent Additions to the community</h3>
-              <div class="sidebar-item recent-posts">
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
-
-            </div><!-- End sidebar -->
-
-          </div><!-- End Search sidebar -->
 
         </div>
 

@@ -52,59 +52,65 @@
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
+  <section id="addnewbook">
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+    <main id="main">
 
-        <div class="section-title">
-        </br>
-          <h2>NEW BOOk</h2>
-          <p>Please enter Book details.</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100"
-
-          <div class="col-lg-6">
-            <form action="{{ url_for('add_book')}}" method="post" role="form" class="php-email-form">
-
-              <div class="row">
-                <div class="col form-group">
-                  <input type="text" name="title" class="form-control" id="title" placeholder="Book Title" required>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col form-group">
-                  <input type="text" name="author" class="form-control" id="author" placeholder="Author" required>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col form-group">
-                  <input type="number" name="pub_year" class="form-control" id="pub_year" placeholder="Published Year" required>
-                </div>
-                <div class="col form-group">
-                  <input type="text" name="category" class="form-control" id="categeory" placeholder="Genre" required>
-                </div>
-              </div>
-              
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Complete!</div>
-              </div>
-              <div class="text-center"><button type="submit">Add</button></div>
-            </form>
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+  
+          <div class="section-title">
+          </br>
+            <h2>NEW BOOk</h2>
+            <p>Please enter Book details.</p>
           </div>
-
+  
+          <div class="row" data-aos="fade-up" data-aos-delay="100"
+  
+            <div class="col-lg-6">
+              <form action="{{ url_for('add_book')}}" method="post" role="form" class="php-email-form">
+  
+                <div class="row">
+                  <div class="col form-group">
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Book Title" required>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col form-group">
+                    <input type="text" name="author" class="form-control" id="author" placeholder="Author" required>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col form-group">
+                    <input type="number" name="pub_year" class="form-control" id="pub_year" placeholder="Published Year" required>
+                  </div>
+                  <div class="col form-group">
+                    <input type="text" name="category" class="form-control" id="categeory" placeholder="Genre" required>
+                  </div>
+                </div>
+                
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Complete!</div>
+                </div>
+                <div class="text-center"><button type="submit">Add</button></div>
+              </form>
+            </div>
+  
+          </div>
+  
         </div>
+      </section><!-- End Contact Section -->
+  
+    </main><!-- End #main -->
 
-      </div>
-    </section><!-- End Contact Section -->
+  </section>
 
-  </main><!-- End #main -->
+  
 
   
 
