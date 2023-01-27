@@ -60,33 +60,35 @@
 
         <div class="section-title">
         </br>
-          <h2>NEW BOOk</h2>
-          <p>Please enter Book details.</p>
+          <h2>Edit Book Details</h2>
+          <p>Please alter Book details accordingly.</p>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100"
 
           <div class="col-lg-6">
-            <form action="{{ url_for('add_book')}}" method="post" role="form" class="php-email-form">
+            <form action="{{ url_for('edit_data') }}" method="post" role="form" class="php-email-form">
+              <input type="hidden" name="book_id" value="{{ book.book_id }}">
+
 
               <div class="row">
                 <div class="col form-group">
-                  <input type="text" name="title" class="form-control" id="title" placeholder="Book Title" required>
+                  <input type="text" name="title" class="form-control" id="title" placeholder="Book Title" value="{{ book.bname }}" required>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col form-group">
-                  <input type="text" name="author" class="form-control" id="author" placeholder="Author" required>
+                  <input type="text" name="author" class="form-control" id="author" placeholder="Author" value="{{ authors.auth_name }}" required>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col form-group">
-                  <input type="number" name="pub_year" class="form-control" id="pub_year" placeholder="Published Year" required>
+                  <input type="number" name="pub_year" class="form-control" id="pub_year" placeholder="Published Year" value="{{ book.pub_year }}" required>
                 </div>
                 <div class="col form-group">
-                  <input type="text" name="category" class="form-control" id="categeory" placeholder="Genre" required>
+                  <input type="text" name="category" class="form-control" id="categeory" placeholder="Genre" value="{{ book.category }}" required>
                 </div>
               </div>
               

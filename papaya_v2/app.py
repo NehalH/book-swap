@@ -146,14 +146,49 @@ def add_book():
 
 
 # Edit-Book      //////////////////////////////////////////////////////////////////////////////
-@app.route('/edit-book')
+@app.route('/edit-book', methods=['POST'])
 def edit_book():
-    return render_template('edit-book.html')
+    book_id = request.form['book_id']
+    book = Book.query.filter_by(book_id=book_id).first()
+    authors = Author.query.filter_by(book_id=book_id).first()
+
+    return render_template('edit-book.html',book=book, authors=authors)
+
+@app.route('/edit-data', methods=['POST'])
+def edit_data():
+    print("WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
+    # Obtain form data
+    book_id = request.form['book_id']
+    bname = request.form['title']
+    auth_name = request.form['author']
+    pub_year = request.form['pub_year']
+    category = request.form['category']
+
+    # Get the book to be updated
+    book = Book.query.filter_by(book_id=book_id).first()
+
+    # Update the book information
+    book.bname = bname
+    book.pub_year = pub_year
+    book.category = category
+    db.session.commit()
+
+    # Get the author to be updated
+    author = Author.query.filter_by(book_id=book_id).first()
+    
+    # Update the author information
+    author.auth_name = auth_name
+    db.session.commit()
+
+    # Redirect the user back to the bookshelf page
+    return redirect(url_for('my_bookshelf'))
+
+
+
 
 # Delete-Book      //////////////////////////////////////////////////////////////////////////////
-@app.route('/delete_book', methods=['POST','GET'])
+@app.route('/delete_book', methods=['POST'])
 def delete_book():
-    print('HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII')
     book_id = request.form['book_id']
     book = Book.query.filter_by(book_id=book_id).first()
 
