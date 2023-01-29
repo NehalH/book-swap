@@ -271,8 +271,6 @@ def accept(exch_id):
 
     reader_1_id = exchange_request.reader_1
     reader_2_id = exchange_request.reader_2
-    reader_1 = Reader.query.filter_by(reader_id=reader_1_id).first()
-    reader_2 = Reader.query.filter_by(reader_id=reader_2_id).first()
 
     shelf_1 = Book_shelf.query.filter_by(reader_id=reader_1_id).first
     shelf_2 = Book_shelf.query.filter_by(reader_id=reader_2_id).first
