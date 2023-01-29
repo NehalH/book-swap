@@ -39,8 +39,6 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->
 
-      <a href="/my-book-shelf" class="get-started-btn scrollto">My Book Shelf</a>
-      <a href="/requests" class="get-started-btn scrollto">Exchange Requests</a>
       <a href="/logout" class="get-started-btn scrollto">Logout</a>
     </div>
   </header><!-- End Header -->
@@ -53,8 +51,8 @@
         <div class="row">
 
             <div class="col order-first">
-              <h6>Books near you</h6>
-              <h2>{{ city }}</h2>
+              <h2>Exchange Requests</h2>
+              <h6>Approve or Deny Book exchange requests</h6>
             </div>
             <div class="col col-2 entries">
               <span>{{ user.fname }}</span> <span>{{ user.lname }}</span>
@@ -73,37 +71,51 @@
         <div class="row">
 
           <div class="col-lg-8 entries">
-            {% if books %}
-              {% for book in books %}
+            {% if requests %}
+              {% for request in requests %}
             
                 <article class="entry">
+                  <h6> {{ reader_2_names[loop.index0]}} wants to exchange book: </h6>
                   <h2 class="entry-title">
-                    <h2>{{ book.bname }}</h2>
+                    <h2>{{ book_1[loop.index0]}}</h2>
                   </h2>
-                  <div class="entry-meta">
-                    <li class="d-flex align-items-center"><i class="bi bi-person"> Author:
-                      {% for author in book_authors[book.book_id] %}
-                        {{ author.auth_name }},
-                      {% endfor %}
-                    </i></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"> Publish Year: {{ book.pub_year }}</i></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-tags"> Genre: {{ book.category }}</i></li>
-                  </div>
+                </br>
+                  <h6> with your book: </h6>
+                  <h2 class="entry-title">
+                    <h2>{{ book_2[loop.index0]}}</h2>
+                  </h2>
+                  
                   <div class="entry-content">
-                    <p>
-                      
-                    </p>
                     <div class="read-more">
-                      <a href="{{ url_for('exchange_for', book_id=book.book_id) }}">Request Exchange</a>
+                      
+                      <form action="" method="post">
+                        <input type="submit" value="Reject" 
+                        style=
+                        "display: inline-block; 
+                        background: #e03a3c;
+                        color: #fff;
+                        border-color: #e03a3c;
+                        padding: 6px 20px;
+                        transition: 0.3s;
+                        font-size: 14px;
+                        border-radius: 4px;">
+                      </form>
                     </div>
+                  </div>
                   
-                  
+                  </br>
+                  <div class="entry-content">
+                    <div class="read-more">
+                      <div class="read-more">
+                        <a href="{{ url_for('accept', exch_id=request.exch_id) }}">Accept Exchange</a>
+                      </div>
+                    </div>
                   </div>
                 </article><!-- End book entry -->
             
             {% endfor %}
           {% else %}
-            <p>Sorry, there are no books available in {{ city }} yet.</p>
+            <p>You have not recieved any exchange requests for now.</p>
           {% endif %} 
           </div><!-- End book entries list -->
 
@@ -131,37 +143,6 @@
                 </form>
               </div>
               <!-- End sidebar search formn-->
-
-
-              <h3 class="sidebar-title">Recent Additions to the community</h3>
-              <div class="sidebar-item recent-posts">
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-                <div class="post-item clearfix">
-                  <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
 
             </div><!-- End sidebar -->
 

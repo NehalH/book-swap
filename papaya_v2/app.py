@@ -231,11 +231,6 @@ def exchange_data():
     book_shelf_2 = Book_shelf.query.join(Book, Book_shelf.shelf_id == Book.shelf_id).filter(Book.book_id == book_id_2).first()
     reader_2 = book_shelf_2.reader_id
 
-    print('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-    print(reader_1)
-    print(reader_2)
-    print(book_id_1)
-    print(book_id_2)
     # Insert the values into the Exchange table
     new_exchange = Exchange(reader_1=reader_1, reader_2=reader_2, book_1=book_id_1, book_2=book_id_2)
     db.session.add(new_exchange)
@@ -243,9 +238,60 @@ def exchange_data():
 
     return redirect(url_for('userhome'))
 
+# Exchange-Requests      //////////////////////////////////////////////////////////////////////////////
+@app.route('/requests')
+def requests():
+    if 'email' in session:
+        email = session['email']
+        user = Reader.query.filter_by(email=email).first()
+        reader_id_2=user.reader_id
+        requests = Exchange.query.filter_by(reader_1=reader_id_2).all()
+        
+        reader_2_names = []
+        book_2 = []
+        book_1 = []
+        for request in requests:
+            reader_2 = Reader.query.filter_by(reader_id=request.reader_2).first()
+            reader_2_names.append(reader_2.fname + " " + reader_2.lname)
+
+            book_2_ele = Book.query.filter_by(book_id=request.book_2).first()
+            print('000000000000000000000000000000000000000000000000000000000')
+            print(book_2_ele.bname)
+            book_2.append(book_2_ele.bname)
+            book_1_ele = Book.query.filter_by(book_id=request.book_1).first()
+            book_1.append(book_1_ele.bname)
+
+        return render_template('requests.html', requests=requests, user=user, reader_2_names=reader_2_names, book_1=book_1, book_2=book_2)
+    return redirect(url_for('login'))
 
 
+@app.route('/accept/<exch_id>')
+def accept(exch_id):
+    exchange_request = Exchange.query.filter_by(exch_id=exch_id).first()
 
+    reader_1_id = exchange_request.reader_1
+    reader_2_id = exchange_request.reader_2
+    reader_1 = Reader.query.filter_by(reader_id=reader_1_id).first()
+    reader_2 = Reader.query.filter_by(reader_id=reader_2_id).first()
+
+    shelf_1 = Book_shelf.query.filter_by(reader_id=reader_1_id).first
+    shelf_2 = Book_shelf.query.filter_by(reader_id=reader_2_id).first
+
+    book_1_id = exchange_request.book_1
+    book_2_id = exchange_request.book_2
+    book_1 = Book.query.filter_by(book_id=book_1_id).first()
+    book_2 = Book.query.filter_by(book_id=book_2_id).first()
+
+    temp = book_1.shelf_id
+    book_1.shelf_id = book_2.shelf_id
+    book_2.shelf_id = temp
+
+    db.session.commit()
+
+    db.session.delete(exchange_request)
+    db.session.commit()
+
+    return redirect(url_for('requests'))
 
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if __name__ == '__main__':
