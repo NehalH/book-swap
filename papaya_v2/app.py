@@ -204,22 +204,46 @@ def delete_book():
         print('Book not found!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         return redirect(url_for('my_book_shelf'))
 
+
 # Exchange-Book      //////////////////////////////////////////////////////////////////////////////
-@app.route('/exchange-for')
-def exchange_for():
+@app.route('/exchange-for/<book_id>')
+def exchange_for(book_id):
     if 'email' in session:
         email = session['email']
         user = Reader.query.filter_by(email=email).first()
-        #book_1 = user.book_id
+        book_1 = Book.query.filter_by(book_id=book_id).first()
         
         book_shelf = Book_shelf.query.filter_by(reader_id=user.reader_id).first()
         books = Book.query.filter_by(shelf_id=book_shelf.shelf_id).all()
-        book_authors = {}
-        for book in books:
-            book_authors[book.book_id] = Author.query.filter_by(book_id=book.book_id).all()
-        return render_template('exchange-for.html', books=books, book_authors=book_authors, user=user)
+        return render_template('exchange-for.html', books=books, user=user, book_id=book_id, book_1=book_1)
     else:
         return redirect(url_for('login'))
+
+@app.route('/exchange-data', methods=['POST'])
+def exchange_data():
+    book_id_1 = request.form['book_id_1']
+    book_id_2 = request.form['book_id_2']
+
+    # Get the reader_id of the owners of book_id_1 and book_id_2 as Reader_1 and Reader_2
+    book_shelf_1 = Book_shelf.query.join(Book, Book_shelf.shelf_id == Book.shelf_id).filter(Book.book_id == book_id_1).first()
+    reader_1 = book_shelf_1.reader_id
+    
+    book_shelf_2 = Book_shelf.query.join(Book, Book_shelf.shelf_id == Book.shelf_id).filter(Book.book_id == book_id_2).first()
+    reader_2 = book_shelf_2.reader_id
+
+    print('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+    print(reader_1)
+    print(reader_2)
+    print(book_id_1)
+    print(book_id_2)
+    # Insert the values into the Exchange table
+    new_exchange = Exchange(reader_1=reader_1, reader_2=reader_2, book_1=book_id_1, book_2=book_id_2)
+    db.session.add(new_exchange)
+    db.session.commit()
+
+    return redirect(url_for('userhome'))
+
+
 
 
 

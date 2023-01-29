@@ -17,16 +17,17 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
@@ -52,7 +53,7 @@
 
             <div class="col order-first">
               <h6>{{ user.fname }}'s Bookshelf </h6>
-              <h2>Select a Book to exchange with</h2>
+              <h2>Select a Book to exchange with {{ book_1.bname }}</h2>
             </div>
             <div class="col col-2 entries">
               <span>{{ user.fname }}</span> <span>{{ user.lname }}</span>
@@ -78,19 +79,14 @@
                   <h2 class="entry-title">
                     <h2>{{ book.bname }}</h2>
                   </h2>
-                  <div class="entry-meta">
-                    <li class="d-flex align-items-center"><i class="bi bi-person"> Author:
-                      {% for author in book_authors[book.book_id] %}
-                        {{ author.auth_name }},
-                      {% endfor %}
-                    </i></li>
-                  </div>
+                  
                   
                   </br>
                   <div class="entry-content">
                     <div class="read-more">
-                      <form action="{{ url_for('edit_book') }}" method="post">
-                        <input type="hidden" name="book_id" value="{{ book.book_id }}">
+                      <form action="{{ url_for('exchange_data') }}" method="post">
+                        <input type="hidden" name="book_id_1" value="{{ book_1.book_id }}">
+                        <input type="hidden" name="book_id_2" value="{{ book.book_id }}">
                         <input type="submit" value="Exchange with this book" 
                         style=
                         "display: inline-block; 

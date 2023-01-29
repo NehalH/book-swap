@@ -77,17 +77,17 @@ class Location(db.Model):
 
 # Exchange        /////////////////////////////////////////////////////////////////////////
 class Exchange(db.Model):
-    exch_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    reader_1 = db.Column(db.Integer, nullable=False)
-    reader_2 = db.Column(db.Integer, nullable=False)
-    book_1 = db.Column(db.Integer, nullable=False)
-    book_2 = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, pincode, locname, city, state):
-        self.pincode = pincode
-        self.locname = locname
-        self.city = city
-        self.state = state
+    exch_id = db.Column(db.Integer, primary_key=True)
+    reader_1 = db.Column(db.Integer, db.ForeignKey('reader.reader_id'))
+    reader_2 = db.Column(db.Integer, db.ForeignKey('reader.reader_id'))
+    book_1 = db.Column(db.Integer, db.ForeignKey('book.book_id'))
+    book_2 = db.Column(db.Integer, db.ForeignKey('book.book_id'))
+    
+    def __init__(self, reader_1, reader_2, book_1, book_2):
+        self.reader_1 = reader_1
+        self.reader_2 = reader_2
+        self.book_1 = book_1
+        self.book_2 = book_2
 
     def __repr__(self):
         return '<Exchange %r>' % self.exch_id
