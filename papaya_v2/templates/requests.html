@@ -87,19 +87,9 @@
                   
                   <div class="entry-content">
                     <div class="read-more">
-                      
-                      <form action="" method="post">
-                        <input type="submit" value="Reject" 
-                        style=
-                        "display: inline-block; 
-                        background: #e03a3c;
-                        color: #fff;
-                        border-color: #e03a3c;
-                        padding: 6px 20px;
-                        transition: 0.3s;
-                        font-size: 14px;
-                        border-radius: 4px;">
-                      </form>
+                      <div class="read-more">
+                        <a href="{{ url_for('reject', exch_id=request.exch_id) }}">Reject</a>
+                      </div>
                     </div>
                   </div>
                   
