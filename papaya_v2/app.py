@@ -291,6 +291,13 @@ def accept(exch_id):
 
     return redirect(url_for('requests'))
 
+@app.route('/reject/<exch_id>')
+def reject(exch_id):
+    exchange_request = Exchange.query.filter_by(exch_id=exch_id).first()
+    db.session.delete(exchange_request)
+    db.session.commit()
+    return redirect(url_for('requests'))
+
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if __name__ == '__main__':
     app.run(debug=True)
